@@ -18,7 +18,7 @@ jQuery(document).ready(function($) {
 		}
 
 		$.post(ajaxurl, data, function(response) {
-//console.log(response);	
+
 			hideLoader();		
 			$('form#csv-data #race_id').val(raceID);
 			

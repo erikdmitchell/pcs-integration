@@ -113,7 +113,9 @@ class PCS_Results {
 			elseif ($header=='uci') :
 				$headers[$key]='uci_points';
 			elseif ($header=='pnt') :
-				$headers[$key]='points';				
+				$headers[$key]='points';
+			elseif ($header=='rider') :
+				$headers[$key]='name';								
 			endif;
 		endforeach;
 

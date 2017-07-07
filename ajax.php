@@ -40,7 +40,7 @@ function pcs_process_results() {
 			$html.='<tr>';
 				
 				foreach ($row as $key => $col) :
-					$html.='<td><input type="text" name="race[results]['.$row_counter.']['.$key.']" class="'.$key.'" value="'.$col.'" /></td>';
+					$html.='<td><input type="text" name="race[results]['.$race_result['type'].']['.$row_counter.']['.$key.']" class="'.$key.'" value="'.$col.'" /></td>';
 				endforeach;
 				
 			$html.='</tr>';
