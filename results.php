@@ -13,7 +13,7 @@ class PCS_Results {
 		$results=array();
 		$result_links=$this->race_result_urls($url);
 		
-		foreach ($result_links as $result_link) :
+		foreach ($result_links as $result_link) :		
 			$res=$this->get_results($result_link['url']);
 			$arr=array(
 				'type' => strtolower($result_link['type']),
@@ -24,7 +24,7 @@ class PCS_Results {
 			
 			$results[]=$arr;
 		endforeach;
-		
+	
 		return $results;
 	}
 	
@@ -46,7 +46,7 @@ class PCS_Results {
 	
 	protected function get_results($url='') {
 		$html=file_get_html($url);
-		$fields_to_ignore=array('pcs', 'km/h');
+		$fields_to_ignore=array('pcs', 'kmh');
 		$keys_to_skip=array();
 		$headers=array();
 		$race_results=array();
@@ -60,7 +60,7 @@ class PCS_Results {
 			
 		// get headers //
 		foreach ($results->find('div b') as $key => $element) :
-			if (in_array(strtolower($element->plaintext), $fields_to_ignore))
+			if (in_array(sanitize_key($element->plaintext), $fields_to_ignore))
 				$keys_to_skip[]=$key;
 				
 			$headers[]=sanitize_key($element->plaintext);

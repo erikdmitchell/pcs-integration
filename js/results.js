@@ -18,13 +18,13 @@ jQuery(document).ready(function($) {
 		}
 
 		$.post(ajaxurl, data, function(response) {
-console.log(response);	
+//console.log(response);	
 			hideLoader();		
-			//$('form#csv-data #race_id').val(raceID);
+			$('form#csv-data #race_id').val(raceID);
 			
-			//$('span#csv-data-form-table').html(response);
+			$('span#csv-data-form-table').html(response);
 			
-			//$('.uci-results .button#add-results').show();
+			$('.uci-results .button#add-results').show();
 		});		
 	});
 
