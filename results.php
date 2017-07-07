@@ -93,8 +93,13 @@ echo "<p>$url</p>";
 
 		// remove unused fields from headers //
 		foreach ($headers as $key => $header) :
-			if (in_array($header, $fields_to_ignore))
+			if (in_array($header, $fields_to_ignore)) :
 				unset($headers[$key]);
+			elseif ($header=='rnk') :
+				$headers[$key]='rank';
+			elseif ($header=='uci') :
+				$headers[$key]='uci_points';
+			endif;
 		endforeach;
 
 		$headers=array_values($headers);
