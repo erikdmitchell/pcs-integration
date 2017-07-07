@@ -112,6 +112,8 @@ class PCS_Results {
 				$headers[$key]='rank';
 			elseif ($header=='uci') :
 				$headers[$key]='uci_points';
+			elseif ($header=='pnt') :
+				$headers[$key]='points';				
 			endif;
 		endforeach;
 
