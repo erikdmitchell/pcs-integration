@@ -1,6 +1,6 @@
 <?php
 
-class PCS {
+class PCS_Results {
 	
 	protected $base_url='http://www.procyclingstats.com/';
 	
@@ -8,12 +8,22 @@ class PCS {
 		include_once(PCS_PATH.'simple_html_dom.php');
 	}
 	
-	public function race_results($url='') {
+	public function race_results($id=0) {
+		$url='http://www.procyclingstats.com/race.php?id='.$id;
+		$results=array();
 		$result_links=$this->race_result_urls($url);
 		
 		foreach ($result_links as $result_link) :
-			$this->get_results($result_link['url']);
+			$arr=array(
+				'type' => strtolower($result_link['type']),
+				'results' => $this->get_results($result_link['url']),
+				'url' => $result_link['url'],
+			);		
+			
+			$results[]=$arr;
 		endforeach;
+		
+		return $results;
 	}
 	
 	protected function race_result_urls($url='') {
@@ -38,9 +48,10 @@ class PCS {
 		$keys_to_skip=array();
 		$headers=array();
 		$race_results=array();
+		$final_results=array();
 		
 		parse_str($url, $url_arr);
-echo "<p>$url</p>";		
+	
 		// get results //
 		foreach ($html->find('.res'.$url_arr['id']) as $element)
 			$results=$element;
@@ -114,10 +125,12 @@ echo "<p>$url</p>";
 			$race_results[$k]=array_values($race_result);
 		endforeach;
 		
-echo '<pre>';
-print_r($headers);
-print_r($race_results);
-echo '</pre>';		
+		// set keys //
+		foreach ($race_results as $race_result) :		
+			$final_results[]=array_combine($headers, $race_result);
+		endforeach;
+		
+		return $final_results;
 	}
 	
 }

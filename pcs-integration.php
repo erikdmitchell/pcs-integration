@@ -14,7 +14,32 @@ define('PCS_URL', plugin_dir_url(__FILE__));
 define('PCS_VERSION', '1.0.0');
 
 include_once(PCS_PATH.'results.php'); // results scrape
+include_once(PCS_PATH.'ajax.php'); // ajax funcs
 
+function pcs_admin_scripts_styles() {
+	wp_register_script('pcs-integration-results', PCS_URL.'js/results.js', array('jquery'), PCS_VERSION, true);
+}
+add_action('admin_enqueue_scripts', 'pcs_admin_scripts_styles');
+
+function pcs_results_admin_integration() {
+	$html='';
+	
+	$html.='<tr>';
+		$html.='<th scope="row">';
+			$html.='<label for="file">PCS Results</label>';
+		$html.='</th>';
+		$html.='<td>';
+			$html.='<input type="text" name="pcs-race-id" id="pcs-race-id" class="regular-text code" value="" />';		
+			$html.='<input type="button" name="button" id="add-pcs-race-results" class="button button-secondary" value="Get PCS Results" />';
+			$html.='<p class="description">Use the PCS race id</p>';
+		$html.='</td>';
+	$html.='</tr>';
+	
+	wp_enqueue_script('pcs-integration-results');
+	
+	echo $html;
+}
+add_action('uci_results_process_results_admin_table', 'pcs_results_admin_integration');
 
 function pcs_integration_plugin_updater() {
 	if (!is_admin())
