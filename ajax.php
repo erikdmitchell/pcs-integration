@@ -1,14 +1,24 @@
 <?php
 function pcs_process_results() {
-	print_r($_POST);
+	$pcs_results=new PCS_Results();
+	$form=array();
+	
+	foreach ($_POST['form'] as $arr) :
+		$form[$arr['name']]=$arr['value'];
+	endforeach;
+
+print_r($form);
+
+	$results=$pcs_results->race_results($form['pcs_race_id']);
+	
+print_r($results);
+// get results in array w/ race_id, header, rows
+// then display
 	
 	wp_die();
 }
 add_action('wp_ajax_pcs_process_results', 'pcs_process_results');
 	/*
-		race_id
-Header
-rows
 				if (empty($arr))
 			return;
 			

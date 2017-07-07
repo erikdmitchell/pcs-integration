@@ -29,7 +29,7 @@ function pcs_results_admin_integration() {
 			$html.='<label for="file">PCS Results</label>';
 		$html.='</th>';
 		$html.='<td>';
-			$html.='<input type="text" name="pcs-race-id" id="pcs-race-id" class="regular-text code" value="" />';		
+			$html.='<input type="text" name="pcs_race_id" id="pcs-race-id" class="regular-text code" value="" />';		
 			$html.='<input type="button" name="button" id="add-pcs-race-results" class="button button-secondary" value="Get PCS Results" />';
 			$html.='<p class="description">Use the PCS race id</p>';
 		$html.='</td>';

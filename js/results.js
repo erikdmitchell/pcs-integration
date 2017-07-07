@@ -3,6 +3,8 @@ jQuery(document).ready(function($) {
 	$('#add-pcs-race-results').on('click', function(e) {
 		e.preventDefault();
 		
+		showLoader('#wpcontent');
+		
 		var raceID=$('form.process-results #race-id').val();
 		var raceSearchID=$('form.process-results #races-list').val();		
 
@@ -16,7 +18,8 @@ jQuery(document).ready(function($) {
 		}
 
 		$.post(ajaxurl, data, function(response) {
-console.log(response);			
+console.log(response);	
+			hideLoader();		
 			//$('form#csv-data #race_id').val(raceID);
 			
 			//$('span#csv-data-form-table').html(response);

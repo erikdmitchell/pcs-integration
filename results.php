@@ -14,9 +14,11 @@ class PCS_Results {
 		$result_links=$this->race_result_urls($url);
 		
 		foreach ($result_links as $result_link) :
+			$res=$this->get_results($result_link['url']);
 			$arr=array(
 				'type' => strtolower($result_link['type']),
-				'results' => $this->get_results($result_link['url']),
+				'headers' => $res['headers'],
+				'results' => $res['results'],
 				'url' => $result_link['url'],
 			);		
 			
@@ -61,7 +63,7 @@ class PCS_Results {
 			if (in_array(strtolower($element->plaintext), $fields_to_ignore))
 				$keys_to_skip[]=$key;
 				
-			$headers[]=strtolower($element->plaintext);
+			$headers[]=sanitize_key($element->plaintext);
 		endforeach;
 		
 		// get results //
@@ -130,7 +132,12 @@ class PCS_Results {
 			$final_results[]=array_combine($headers, $race_result);
 		endforeach;
 		
-		return $final_results;
+		$arr=array(
+			'headers' => $headers,
+			'results' => $final_results,
+		);
+		
+		return $arr;
 	}
 	
 }
