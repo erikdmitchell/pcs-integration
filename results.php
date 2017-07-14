@@ -112,13 +112,15 @@ class PCS_Results {
 			if (in_array($header, $fields_to_ignore)) :
 				unset($headers[$key]);
 			elseif ($header=='rnk') :
-				$headers[$key]='place';
+				$headers[$key]='rank';
 			elseif ($header=='uci') :
 				$headers[$key]='uci_points';
 			elseif ($header=='pnt') :
 				$headers[$key]='points';
 			elseif ($header=='rider') :
-				$headers[$key]='name';								
+				$headers[$key]='name';
+			elseif ($header=='time') :
+				$headers[$key]='result';												
 			endif;
 		endforeach;
 
