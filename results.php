@@ -109,7 +109,7 @@ class PCS_Results {
 			if (in_array($header, $fields_to_ignore)) :
 				unset($headers[$key]);
 			elseif ($header=='rnk') :
-				$headers[$key]='rank';
+				$headers[$key]='place';
 			elseif ($header=='uci') :
 				$headers[$key]='uci_points';
 			elseif ($header=='pnt') :
