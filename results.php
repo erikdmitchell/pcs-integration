@@ -20,11 +20,14 @@ class PCS_Results {
 				'headers' => $res['headers'],
 				'results' => $res['results'],
 				'url' => $result_link['url'],
-			);		
+			);
+			
+			if ($arr['type']=='stage')
+				$arr['type']='result';		
 			
 			$results[]=$arr;
 		endforeach;
-	
+
 		return $results;
 	}
 	
