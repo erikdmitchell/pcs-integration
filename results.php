@@ -68,12 +68,13 @@ class PCS_Results {
 				
 			$headers[]=sanitize_key($element->plaintext);
 		endforeach;
-		
+	
 		// get results //
 		foreach ($results->find('.result .line') as $line) :
 			$arr=array();
 			
 			foreach ($line->find('span.show') as $key => $span) :
+				$nat='';
 				$value=trim(str_replace('&nbsp;', '', $span->plaintext));
 				
 				switch ($headers[$key]) :
@@ -86,6 +87,14 @@ class PCS_Results {
 							$first=trim(str_replace($last, '', $a->plaintext));
 							$value=$first.' '.$last;
 						endforeach;
+						
+						// get country //
+/*
+						foreach ($span->find('span.flags') as $el) :
+							$nat=$el->getAttribute('class');
+							$nat=trim(str_replace('flags', '', $nat));
+						endforeach;
+*/
 						break;
 					case 'uci':
 						if (empty($value) || $value=='') :
@@ -100,7 +109,7 @@ class PCS_Results {
 							$value=trim($st->plaintext);
 						break;
 				endswitch;
-				
+//echo $nat.'<br>';				
 				$arr[]=$value;
 			endforeach;
 			
@@ -145,7 +154,7 @@ class PCS_Results {
 			'headers' => $headers,
 			'results' => $final_results,
 		);
-		
+	
 		return $arr;
 	}
 	
